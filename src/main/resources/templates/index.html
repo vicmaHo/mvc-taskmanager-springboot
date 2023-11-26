@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>MVC TaskAPP</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
 </head>
+
 <body>
-    
+
+    <div class="container mt-4" >
+        <h1 class="mt-4 mb-4">Task List</h1>
+
+
+         <!-- Lista de tareas de forma dinamica usando thymeleaf -->
+        <ul class="list-group">
+            <li th:each="task, index : ${tasks}" class="list-group-item">
+                <span th:text="${task.descripcion}"></span>
+                <form action="/deleteTask" method="post" class="float-right">
+                    <input type="hidden" name="index" th:value="${index.index}">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </li>
+        </ul>
+
+
+       
+
+
+        <!-- Formulario para agregar una nueva tarea -->
+        <form action="/addTask" method="post" class="mt-4">
+            <div class="form-group">
+                <label for="description">Descripción de la nueva tarea:</label>
+                <input type="text" name="description" id="description" required class="form-control">
+
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
+
 </html>
